@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["pytest", "reservas.py"]
+CMD ["python", "reservas.py"]
