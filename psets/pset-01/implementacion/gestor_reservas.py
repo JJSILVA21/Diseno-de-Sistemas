@@ -112,8 +112,6 @@ class GestorReservas:
         if not solicitudes_validas:
             raise ValueError("Ninguna de las solicitudes es válida.")
 
-        # Mayor nivel de prioridad gana.
-        # Si tienen la misma prioridad, gana la solicitud recibida primero.
         solicitudes_ordenadas = sorted(
             solicitudes_validas,
             key=lambda solicitud: (
