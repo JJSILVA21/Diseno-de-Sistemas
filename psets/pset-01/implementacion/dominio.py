@@ -32,7 +32,6 @@ class ReglaPrioridad(ABC):
     def nivel_prioridad(self) -> int:
         pass
 
-
 class SinPrioridad(ReglaPrioridad):
 
     def permite_reservar(self, hora: time) -> bool:
@@ -52,7 +51,6 @@ class PrioridadAntesDeLas18(ReglaPrioridad):
     def nivel_prioridad(self) -> int:
         return 1
 
-# ESTUDIANTES
 class Estudiante:
 
     def __init__(self,id_estudiante: str,nombre: str,regla_prioridad: ReglaPrioridad):
@@ -84,7 +82,6 @@ class Capitan(Estudiante):
         )
         self.equipo_oficial = equipo_oficial
 
-# CUENTA INSTITUCIONAL
 class CuentaInstitucional:
 
     def __init__(self,identificador: str,contrasena: str,propietario: Estudiante,activa: bool = True):
@@ -134,7 +131,6 @@ class Cancha:
         estado = "Habilitada" if self.habilitada else "Inhabilitada"
         return f"{self.nombre} ({estado})"
 
-# SOLICITUD DE RESERVA
 class SolicitudReserva:
 
     def __init__(self,id_solicitud: str,solicitante: Estudiante,cancha: Cancha,fecha: date,hora_inicio: time,momento_recepcion: Optional[datetime] = None):
@@ -239,8 +235,6 @@ class ConflictoAdministrativo:
             f"{self.id} - {self.descripcion} "
             f"[{self.estado.value}]"
         )
-
-# ADMINISTRADOR
 
 class Administrador:
     def __init__(self,id_administrador: str,nombre: str):

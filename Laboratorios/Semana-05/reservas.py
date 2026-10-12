@@ -36,7 +36,33 @@ class ReservaPrioridad:
         self.tipo = "Prioridad"
     def confirmar(self): 
         return "Reserva con prioridad confirmada para " + self.solicitante.nombre
+
+class CreadorDeReserva():
+    def crear_reserva(self, cancha, fecha, hora_inicio, hora_fin, solicitante):
+        raise NotImplementedError
     
+class CreadorDeReservaRegular(CreadorDeReserva):
+    def crear_reserva(self, cancha, fecha, hora_inicio, hora_fin, solicitante):
+        return ReservaRegular(
+            cancha,
+            fecha,
+            hora_inicio,
+            hora_fin,
+            solicitante
+        )
+
+class CreadorDeReservaPrioritaria(CreadorDeReserva):
+    def crear_reserva(self, cancha, fecha, hora_inicio, hora_fin, solicitante):
+        return ReservaPrioridad(
+            cancha,
+            fecha,
+            hora_inicio,
+            hora_fin,
+            solicitante
+        )
+
+
+
 def reservar_desde_web(cancha, fecha, hora_inicio, hora_fin, solicitante):
     creador = FabricaDeReservas.elegir_creador(solicitante)
     reserva = creador.crear_reserva(
@@ -68,29 +94,6 @@ def reservar_desde_hall(cancha, fecha, hora_inicio, hora_fin, equipo):
 
     return reserva
 
-class CreadorDeReserva():
-    def crear_reserva(self, cancha, fecha, hora_inicio, hora_fin, solicitante):
-        raise NotImplementedError
-    
-class CreadorDeReservaRegular(CreadorDeReserva):
-    def crear_reserva(self, cancha, fecha, hora_inicio, hora_fin, solicitante):
-        return ReservaRegular(
-            cancha,
-            fecha,
-            hora_inicio,
-            hora_fin,
-            solicitante
-        )
-
-class CreadorDeReservaPrioritaria(CreadorDeReserva):
-    def crear_reserva(self, cancha, fecha, hora_inicio, hora_fin, solicitante):
-        return ReservaPrioridad(
-            cancha,
-            fecha,
-            hora_inicio,
-            hora_fin,
-            solicitante
-        )
 
 class FabricaDeReservas():
     @staticmethod
